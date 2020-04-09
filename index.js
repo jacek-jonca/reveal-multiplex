@@ -10,11 +10,11 @@ var crypto	= require('crypto');
 var app		= express();
 
 var corsOptions = {
-	"origin": "*",
+	"origin": "*:*",
 	"methods": "GET,POST",
 	"allowedHeaders": ["Origin", "X-Requested-With", "Content-Type", "Accept"],
 	"credentials": true,
-	"optionsSuccessStatus": 200
+	"optionsSuccessStatus": 200,
 }
 
 var staticDir	= express.static;

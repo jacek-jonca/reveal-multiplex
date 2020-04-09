@@ -17,6 +17,33 @@ var corsOptions = {
 	"optionsSuccessStatus": 200,
 }
 
+// enable cors
+//app.use(cors(options));
+// cors header config options
+//options = { "origin": "*", "methods": "GET,POST", "allowedHeaders": ["Origin", "X-Requested-With", "Content-Type", "Accept"], "credentials": true };
+//method => app.use(cors(options))
+
+var allowedOrigins = ['http://jonca.org:8080',
+					  'https://jonca.org:8080',
+					  'http://jonca.org:*',
+					  'https://jonca.org:*',
+					  '*',
+					  '*:*'];
+app.use(cors({
+  origin: function(origin, callback){
+    // allow requests with no origin 
+    // (like mobile apps or curl requests)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      var msg = 'The CORS policy for this site does not ' +
+                'allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
+
+
 var staticDir	= express.static;
 var server	= http.createServer(app);
 
@@ -42,20 +69,14 @@ io.on( 'connection', function( socket ) {
 	});
 });
 
-// enable cors
-app.use(cors(options));
-// cors header config options
-//options = { "origin": "*", "methods": "GET,POST", "allowedHeaders": ["Origin", "X-Requested-With", "Content-Type", "Accept"], "credentials": true };
-//method => app.use(cors(options))
-
 // Home route
-app.get("/", cors(corsOptions), (req, res) => {
+app.get("/", (req, res) => {
 			res.send('<style>body{font-family: sans-serif;}</style><h2>reveal.js multiplex server.</h2><a href="/token">Generate token</a>');
 		});
 		
 // token route
 
-app.get("/token", cors(corsOptions), function(req,res) {
+app.get("/token", function(req,res) {
         var ts = new Date().getTime();
         var rand = Math.floor(Math.random()*9999999);
         var origsecret = ts.toString() + rand.toString();

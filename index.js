@@ -10,9 +10,12 @@ var crypto	= require('crypto');
 var app		= express();
 
 var corsOptions = {
-	origin: '*:*',
-	optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
+	"origin": "*",
+	"methods": "GET,POST",
+	"allowedHeaders": ["Origin", "X-Requested-With", "Content-Type", "Accept"],
+	"credentials": true,
+	"optionsSuccessStatus": 200
+}
 
 var staticDir	= express.static;
 var server	= http.createServer(app);
@@ -40,7 +43,7 @@ io.on( 'connection', function( socket ) {
 });
 
 // enable cors
-//app.use(cors());
+app.use(cors(options));
 // cors header config options
 //options = { "origin": "*", "methods": "GET,POST", "allowedHeaders": ["Origin", "X-Requested-With", "Content-Type", "Accept"], "credentials": true };
 //method => app.use(cors(options))

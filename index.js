@@ -3,6 +3,7 @@
 
 var http	= require('http');
 var express	= require('express');
+var cors 	= require('cors');
 var fs		= require('fs');
 var io		= require('socket.io');
 var crypto	= require('crypto');
@@ -33,7 +34,8 @@ io.on( 'connection', function( socket ) {
 	});
 });
 
-// home route
+// enable cors
+app.use(cors());
 
 // Home route
 app.get("/", (req, res) => {

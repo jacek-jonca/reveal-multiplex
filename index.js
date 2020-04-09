@@ -10,7 +10,7 @@ var crypto	= require('crypto');
 var app		= express();
 
 var corsOptions = {
-	"origin": "*:*",
+	"origin": "https://mpx.now.sh",
 	"methods": "GET,POST",
 	"allowedHeaders": ["Origin", "X-Requested-With", "Content-Type", "Accept"],
 	"credentials": true,

@@ -10,7 +10,7 @@ var crypto	= require('crypto');
 var app		= express();
 
 var corsOptions = {
-	origin: 'https://jonca.org',
+	origin: '*:*',
 	optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 

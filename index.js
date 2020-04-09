@@ -7,8 +7,13 @@ var cors 	= require('cors');
 var fs		= require('fs');
 var io		= require('socket.io');
 var crypto	= require('crypto');
-
 var app		= express();
+
+var corsOptions = {
+	origin: 'https://jonca.org',
+	optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }
+
 var staticDir	= express.static;
 var server	= http.createServer(app);
 
@@ -35,16 +40,19 @@ io.on( 'connection', function( socket ) {
 });
 
 // enable cors
-app.use(cors());
+//app.use(cors());
+// cors header config options
+//options = { "origin": "*", "methods": "GET,POST", "allowedHeaders": ["Origin", "X-Requested-With", "Content-Type", "Accept"], "credentials": true };
+//method => app.use(cors(options))
 
 // Home route
-app.get("/", (req, res) => {
+app.get("/", cors(corsOptions), (req, res) => {
 			res.send('<style>body{font-family: sans-serif;}</style><h2>reveal.js multiplex server.</h2><a href="/token">Generate token</a>');
 		});
 		
 // token route
 
-app.get("/token", function(req,res) {
+app.get("/token", cors(corsOptions), function(req,res) {
         var ts = new Date().getTime();
         var rand = Math.floor(Math.random()*9999999);
         var origsecret = ts.toString() + rand.toString();

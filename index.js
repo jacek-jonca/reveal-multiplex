@@ -33,18 +33,14 @@ io.on( 'connection', function( socket ) {
 	});
 });
 
-app.get("/", function(req, res) {
-        res.writeHead(200, {'Content-Type': 'text/html'});
+// home route
 
-	var stream = fs.createReadStream('index.html');
-	stream.on('error', function( error ) {
-		res.write('<style>body{font-family: sans-serif;}</style><h2>reveal.js multiplex server.</h2><a href="/token">Generate token</a>');
-		res.end();
-	});
-	stream.on('readable', function() {
-		stream.pipe(res);
-	});
-});
+// Home route
+app.get("/", (req, res) => {
+			res.send('<style>body{font-family: sans-serif;}</style><h2>reveal.js multiplex server.</h2><a href="/token">Generate token</a>');
+		});
+		
+// token route
 
 app.get("/token", function(req,res) {
         var ts = new Date().getTime();

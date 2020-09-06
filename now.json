@@ -8,6 +8,16 @@
       "methods": ["GET"]
     },
     {
+      "src": "/client.js",
+      "dest": "/client.js",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/master.js",
+      "dest": "/master.js",
+      "methods": ["GET"]
+    },
+    {
       "src": "/token",
       "dest": "/index.js",
       "methods": ["GET"]

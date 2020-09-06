@@ -3,10 +3,14 @@
   "version": "1.2.4",
   "description": "reveal.js multiplex server",
   "repository": "seanho00/reveal-multiplex",
+  "engines": {
+    "node": ">=9.0.0"
+  },
   "dependencies": {
     "cors": "2.8.5",
     "express": "^5.0.0-alpha.7",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "mustache": "~4.0.0"
   },
   "license": "MIT",
   "main": "index.js",
